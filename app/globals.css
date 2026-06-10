@@ -310,6 +310,15 @@ nav.bar {
   z-index: 2;
 }
 
+.c-bm {
+  width: 38%;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0px;
+  height: 130px;
+  z-index: 3;
+}
+
 .hero-h {
   margin: 6px 0 18px;
 }
