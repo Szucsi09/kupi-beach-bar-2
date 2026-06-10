@@ -120,7 +120,6 @@ nav.bar {
   background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(10, 74, 78, 0.07);
 }
 
 .bar-inner {
@@ -129,14 +128,13 @@ nav.bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 11px 18px;
+  padding: 11px 18px 0px;
 }
 
 .nav-logo {
-  height: 38px;
+  height: 46px;
   width: auto;
   border-radius: 7px;
-  box-shadow: 0 2px 8px rgba(10, 74, 78, 0.15);
 }
 
 .hamb {
@@ -151,7 +149,6 @@ nav.bar {
   justify-content: center;
   gap: 5px;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(52, 204, 215, 0.35);
 }
 
 .hamb span {
@@ -255,12 +252,12 @@ nav.bar {
 
 /* HERO */
 .hero {
-  padding: 30px 18px 14px;
+  padding: 0 18px 14px;
 }
 
 .collage {
   position: relative;
-  height: 560px;
+  height: 500px;
   margin: 0 auto 26px;
 }
 
@@ -279,7 +276,7 @@ nav.bar {
   left: 16.5%;
   top: 96px;
   z-index: 3;
-  height: 340px;
+  height: 260px;
 }
 
 .c-tl {
@@ -485,13 +482,6 @@ nav.bar {
 /* MENU */
 .menu-sec {
   background: var(--turquoise);
-  background-image: repeating-linear-gradient(
-    180deg,
-    transparent,
-    transparent 46px,
-    rgba(255, 255, 255, 0.09) 46px,
-    rgba(255, 255, 255, 0.09) 48px
-  );
   padding: 44px 20px 50px;
   margin-top: 38px;
 }

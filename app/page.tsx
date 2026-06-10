@@ -1,5 +1,4 @@
 import { AboutSection } from "@/components/about-section";
-import { ClosingCta } from "@/components/closing-cta";
 import { Footer } from "@/components/footer";
 import { FullwidthBreak } from "@/components/fullwidth-break";
 import { HeroSection } from "@/components/hero-section";
@@ -20,7 +19,6 @@ export default function Home() {
         <StrengthsSection />
         <MenuSection />
         <ReviewsSection />
-        <ClosingCta />
         <LocationSection />
         <Footer />
       </div>
