@@ -170,11 +170,4 @@ export const collageImages = [
     rot: 0,
     par: 0.36,
   },
-  {
-    src: "/images/kupiBB2.jpg",
-    alt: "KuPi étel a vízparton",
-    className: "c-bm",
-    rot: 0,
-    par: 0.34,
-  },
 ] as const;
