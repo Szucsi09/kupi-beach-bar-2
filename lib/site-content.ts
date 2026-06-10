@@ -172,7 +172,7 @@ export const collageImages = [
   },
   {
     src: "/images/kupiBB2.jpg",
-    alt: "Rántott hal tányér",
+    alt: "KuPi étel a vízparton",
     className: "c-bm",
     rot: 0,
     par: 0.34,
