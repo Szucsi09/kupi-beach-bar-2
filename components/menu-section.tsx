@@ -11,12 +11,18 @@ export const MenuSection = () => (
     </ScrollReveal>
     {menuContent.dishes.map((dish) => (
       <ScrollReveal key={dish.title} className="dish">
-        <div className="dish-img">
-          <Image src={dish.image} alt={dish.imageAlt} fill sizes="360px" />
+        <div className="dish-flip" tabIndex={0} aria-label={`${dish.title} – ${dish.description}`}>
+          <div className="dish-flip-inner">
+            <div className="dish-flip-front">
+              <Image src={dish.image} alt={dish.imageAlt} fill sizes="360px" />
+            </div>
+            <div className="dish-flip-back">
+              <p>{dish.description}</p>
+            </div>
+          </div>
         </div>
         <div className="dish-body">
           <h3>{dish.title}</h3>
-          <p>{dish.description}</p>
         </div>
       </ScrollReveal>
     ))}
