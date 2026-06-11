@@ -509,35 +509,39 @@ nav.bar {
 /* Outer positioning wrapper — carries the nth-child offsets */
 .dish-wrap {
   max-width: 420px;
-  margin-bottom: 26px;
+  margin-bottom: 28px;
 }
 
 .dish-wrap:nth-child(2) { margin-left: 14px; }
 .dish-wrap:nth-child(3) { margin-left: 0; margin-right: 10px; }
 .dish-wrap:nth-child(4) { margin-left: 20px; }
 
-/* Flip root: perspective lives here, no overflow:hidden so 3D isn't clipped */
+/* Flip root — perspective here, NO overflow:hidden (clips 3D) */
 .dish-card {
   display: block;
   width: 100%;
-  perspective: 1200px;
+  perspective: 1100px;
   cursor: pointer;
-  /* keep the reveal animation shape */
   border-radius: 20px;
+  outline: none;
+}
+
+.dish-card:focus-visible {
+  box-shadow: 0 0 0 3px var(--lime);
 }
 
 /* The rotating inner container */
 .dish-card-inner {
   position: relative;
   width: 100%;
-  /* total card height = image + body */
-  height: 320px;
-  transition: transform 0.65s cubic-bezier(0.45, 0.05, 0.15, 1.0);
+  height: 340px;
+  transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
   transform-style: preserve-3d;
+  will-change: transform;
 }
 
-.dish-card:hover .dish-card-inner,
-.dish-card:focus-visible .dish-card-inner {
+/* JS-driven flip — toggled by .flipped class */
+.dish-card.flipped .dish-card-inner {
   transform: rotateY(180deg);
 }
 
@@ -554,7 +558,7 @@ nav.bar {
   box-shadow: var(--shadow-lg);
 }
 
-/* FRONT face: image on top, title below */
+/* FRONT face: image on top, title + hint below */
 .dish-front {
   background: #fff;
   display: flex;
@@ -575,7 +579,7 @@ nav.bar {
 
 .dish-body {
   flex-shrink: 0;
-  padding: 18px 20px 22px;
+  padding: 16px 20px 18px;
   background: #fff;
 }
 
@@ -583,9 +587,17 @@ nav.bar {
   font-size: 22px;
   font-weight: 700;
   line-height: 1.25;
+  margin-bottom: 4px;
 }
 
-/* BACK face: rotated 180° on Y, shows ingredients */
+.dish-hint {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: rgba(10, 74, 78, 0.45);
+}
+
+/* BACK face — pre-rotated so it faces away on start */
 .dish-back {
   transform: rotateY(180deg);
   background: var(--turquoise-deep);
@@ -595,24 +607,72 @@ nav.bar {
 }
 
 .dish-back-inner {
-  padding: 28px 26px;
+  padding: 30px 28px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
 }
 
-.dish-back-label {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
+/* Eyebrow label */
+.dish-back-eyebrow {
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
   color: var(--lime);
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
-.dish-back-inner > p:last-child {
-  color: #fff;
-  font-size: 17px;
-  line-height: 1.6;
-  text-wrap: pretty;
+/* Thin divider */
+.dish-back-divider {
+  width: 36px;
+  height: 2px;
+  background: rgba(187, 221, 30, 0.55);
+  border-radius: 2px;
+  margin-bottom: 18px;
+}
+
+/* Bullet list */
+.dish-back-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.dish-back-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.94);
+  text-align: left;
+}
+
+.dish-back-list li::before {
+  content: "";
+  display: inline-block;
+  flex-shrink: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--lime);
+  margin-top: 5px;
+}
+
+/* Tap-back cue */
+.dish-back-tap {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  color: rgba(255, 255, 255, 0.35);
 }
 
 .menu-sec .more {
