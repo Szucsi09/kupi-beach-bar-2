@@ -504,94 +504,114 @@ nav.bar {
   max-width: 26ch;
 }
 
-.dish {
-  background: #fff;
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: var(--shadow-lg);
-  margin-bottom: 22px;
-  max-width: 360px;
+/* ── MENU CARD FLIP ─────────────────────────────────── */
+
+/* Outer positioning wrapper — carries the nth-child offsets */
+.dish-wrap {
+  max-width: 420px;
+  margin-bottom: 26px;
 }
 
-.dish:nth-child(2) {
-  margin-left: 12px;
-}
+.dish-wrap:nth-child(2) { margin-left: 14px; }
+.dish-wrap:nth-child(3) { margin-left: 0; margin-right: 10px; }
+.dish-wrap:nth-child(4) { margin-left: 20px; }
 
-.dish:nth-child(3) {
-  margin-left: 0;
-  margin-right: 8px;
-}
-
-.dish:nth-child(4) {
-  margin-left: 18px;
-}
-
-.dish-flip {
-  height: 188px;
-  perspective: 1000px;
+/* Flip root: perspective lives here, no overflow:hidden so 3D isn't clipped */
+.dish-card {
+  display: block;
+  width: 100%;
+  perspective: 1200px;
   cursor: pointer;
+  /* keep the reveal animation shape */
+  border-radius: 20px;
 }
 
-.dish-flip-inner {
+/* The rotating inner container */
+.dish-card-inner {
   position: relative;
   width: 100%;
-  height: 100%;
-  transition: transform 0.6s ease;
+  /* total card height = image + body */
+  height: 320px;
+  transition: transform 0.65s cubic-bezier(0.45, 0.05, 0.15, 1.0);
   transform-style: preserve-3d;
 }
 
-.dish-flip:hover .dish-flip-inner,
-.dish-flip:focus-visible .dish-flip-inner {
+.dish-card:hover .dish-card-inner,
+.dish-card:focus-visible .dish-card-inner {
   transform: rotateY(180deg);
 }
 
-.dish-flip-front,
-.dish-flip-back {
+/* Shared face styles */
+.dish-face {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+  border-radius: 20px;
   overflow: hidden;
+  box-shadow: var(--shadow-lg);
 }
 
-.dish-flip-front img {
+/* FRONT face: image on top, title below */
+.dish-front {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.dish-img {
+  position: relative;
+  flex: 1 1 0;
+  min-height: 0;
+}
+
+.dish-img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.dish-flip-back {
-  transform: rotateY(180deg);
-  background: var(--turquoise);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 18px 22px;
-}
-
-.dish-flip-back p {
-  color: #fff;
-  font-size: 15.5px;
-  line-height: 1.5;
-  text-align: center;
-  text-wrap: pretty;
-}
-
 .dish-body {
-  padding: 16px 18px 19px;
+  flex-shrink: 0;
+  padding: 18px 20px 22px;
+  background: #fff;
 }
 
 .dish-body h3 {
-  font-size: 21px;
+  font-size: 22px;
   font-weight: 700;
-  margin-bottom: 6px;
+  line-height: 1.25;
 }
 
-.dish-body p {
-  font-size: 14.5px;
-  color: rgba(10, 74, 78, 0.72);
+/* BACK face: rotated 180° on Y, shows ingredients */
+.dish-back {
+  transform: rotateY(180deg);
+  background: var(--turquoise-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dish-back-inner {
+  padding: 28px 26px;
+  text-align: center;
+}
+
+.dish-back-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--lime);
+  margin-bottom: 14px;
+}
+
+.dish-back-inner > p:last-child {
+  color: #fff;
+  font-size: 17px;
+  line-height: 1.6;
   text-wrap: pretty;
 }
 
