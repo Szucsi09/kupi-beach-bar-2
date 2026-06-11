@@ -65,6 +65,7 @@ img {
 }
 
 .photo {
+  border: 6px solid var(--white);
   box-shadow: var(--shadow);
   background: var(--white);
 }
@@ -271,52 +272,47 @@ nav.bar {
 }
 
 .c-center {
-  width: 56%;
-  left: 22%;
+  width: 67%;
+  left: 16.5%;
   top: 96px;
   z-index: 3;
-  height: 220px;
+  height: 260px;
 }
 
 .c-tl {
-  width: 38%;
-  left: 3%;
-  top: 0px;
-  height: 130px;
+  width: 47%;
+  left: 1%;
+  top: 12px;
+  height: 168px;
+  transform: rotate(-3deg);
   z-index: 2;
 }
 
 .c-tr {
-  width: 38%;
-  right: 3%;
+  width: 46%;
+  right: 0%;
   top: 0px;
-  height: 130px;
+  height: 158px;
+  transform: rotate(2.4deg);
   z-index: 4;
 }
 
 .c-bl {
-  width: 38%;
-  left: 3%;
-  bottom: 0px;
-  height: 130px;
+  width: 48%;
+  left: 2%;
+  bottom: 6px;
+  height: 175px;
+  transform: rotate(4deg);
   z-index: 4;
 }
 
 .c-br {
-  width: 38%;
-  right: 3%;
-  bottom: 0px;
-  height: 130px;
+  width: 45%;
+  right: 1%;
+  bottom: 18px;
+  height: 150px;
+  transform: rotate(-2.2deg);
   z-index: 2;
-}
-
-.c-bm {
-  width: 38%;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 0px;
-  height: 130px;
-  z-index: 3;
 }
 
 .hero-h {
