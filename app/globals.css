@@ -504,17 +504,68 @@ nav.bar {
   max-width: 26ch;
 }
 
-/* ── MENU CARD FLIP ─────────────────────────────────── */
-
-/* Outer positioning wrapper — carries the nth-child offsets */
-.dish-wrap {
-  max-width: 420px;
+/* ── MENU CATEGORY TABS ─────────────────────────────── */
+.menu-tabs-wrap {
   margin-bottom: 28px;
 }
 
-.dish-wrap:nth-child(2) { margin-left: 14px; }
-.dish-wrap:nth-child(3) { margin-left: 0; margin-right: 10px; }
-.dish-wrap:nth-child(4) { margin-left: 20px; }
+.menu-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.menu-tab {
+  appearance: none;
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  background: transparent;
+  color: #fff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding: 9px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.menu-tab:hover {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.menu-tab.active {
+  background: var(--lime);
+  border-color: var(--lime);
+  color: var(--turquoise-deep);
+}
+
+.menu-tab:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.6);
+}
+
+/* ── MENU CARD GRID ─────────────────────────────────── */
+.dish-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  max-width: 420px;
+  margin: 0 auto;
+  justify-items: center;
+}
+
+/* ── MENU CARD FLIP ─────────────────────────────────── */
+
+/* Outer positioning wrapper */
+.dish-wrap {
+  width: 100%;
+  max-width: 420px;
+}
 
 /* Flip root — perspective here, NO overflow:hidden (clips 3D) */
 .dish-card {
@@ -581,20 +632,38 @@ nav.bar {
   flex-shrink: 0;
   padding: 16px 20px 18px;
   background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .dish-body h3 {
   font-size: 22px;
   font-weight: 700;
   line-height: 1.25;
-  margin-bottom: 4px;
 }
 
 .dish-hint {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  color: rgba(10, 74, 78, 0.45);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--turquoise);
+  color: #fff;
+}
+
+.dish-hint-icon {
+  width: 20px;
+  height: 20px;
+  animation: hint-tap 1.6s ease-in-out infinite;
+}
+
+@keyframes hint-tap {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
 }
 
 /* BACK face — pre-rotated so it faces away on start */
