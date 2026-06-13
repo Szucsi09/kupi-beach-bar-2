@@ -669,14 +669,16 @@ nav.bar {
 /* BACK face — pre-rotated so it faces away on start */
 .dish-back {
   transform: rotateY(180deg);
-  background: var(--turquoise-deep);
+  background: var(--turquoise);
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 3px dashed rgba(255, 255, 255, 0.7);
+  border-radius: 20px;
 }
 
 .dish-back-inner {
-  padding: 30px 28px;
+  padding: 32px 28px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -686,42 +688,42 @@ nav.bar {
 
 /* Eyebrow label */
 .dish-back-eyebrow {
-  font-size: 10.5px;
-  font-weight: 800;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
-  color: var(--lime);
-  margin-bottom: 12px;
+  font-family: var(--font-pacifico), cursive;
+  font-size: 28px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--turquoise-deep);
+  margin-bottom: 18px;
+  line-height: 1.2;
+  max-width: 90%;
+  text-wrap: pretty;
 }
 
 /* Thin divider */
 .dish-back-divider {
-  width: 36px;
-  height: 2px;
-  background: rgba(187, 221, 30, 0.55);
-  border-radius: 2px;
-  margin-bottom: 18px;
+  display: none;
 }
 
 /* Bullet list */
 .dish-back-list {
   list-style: none;
   padding: 0;
-  margin: 0 0 20px;
+  margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 11px;
   width: 100%;
+  max-width: 280px;
 }
 
 .dish-back-list li {
   display: flex;
-  align-items: baseline;
-  gap: 9px;
+  align-items: flex-start;
+  gap: 12px;
   font-size: 16px;
   font-weight: 500;
-  line-height: 1.35;
-  color: rgba(255, 255, 255, 0.94);
+  line-height: 1.4;
+  color: var(--turquoise-deep);
   text-align: left;
 }
 
@@ -729,19 +731,16 @@ nav.bar {
   content: "";
   display: inline-block;
   flex-shrink: 0;
-  width: 5px;
-  height: 5px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: var(--lime);
-  margin-top: 5px;
+  margin-top: 6px;
 }
 
 /* Tap-back cue */
 .dish-back-tap {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.07em;
-  color: rgba(255, 255, 255, 0.35);
+  display: none;
 }
 
 .menu-sec .more {

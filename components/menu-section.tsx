@@ -88,7 +88,7 @@ function DishCard({ dish }: { dish: Dish }) {
         {/* BACK: ingredients */}
         <div className="dish-face dish-back">
           <div className="dish-back-inner">
-            <p className="dish-back-eyebrow">Hozzávalók</p>
+            <p className="dish-back-eyebrow">{dish.title}</p>
             <div className="dish-back-divider" />
             <ul className="dish-back-list">
               {bullets.map((item) => (
