@@ -103,8 +103,12 @@ function DishCard({ dish }: { dish: Dish }) {
   );
 }
 
+type CategoryId = (typeof menuContent.categories)[number]["id"];
+
 export const MenuSection = () => {
-  const [activeId, setActiveId] = useState(menuContent.categories[0].id);
+  const [activeId, setActiveId] = useState<CategoryId>(
+    menuContent.categories[0].id,
+  );
   const activeCategory =
     menuContent.categories.find((c) => c.id === activeId) ??
     menuContent.categories[0];
