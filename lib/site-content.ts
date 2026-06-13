@@ -53,8 +53,11 @@ export const strengths = [
     num: "03",
     title: "A víz partján, nem mellette",
     description: "Van pár hely, ahol igazán jó leülni. Mi ott vagyunk.",
+    image: "/images/kupiBB8.jpg",
+    imageAlt: "KuPi terasz",
     reverse: false,
-    hasImage: false,
+    hasImage: true,
+    rotationClass: "r3",
   },
 ] as const;
 
