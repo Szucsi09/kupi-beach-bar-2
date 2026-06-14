@@ -504,31 +504,149 @@ nav.bar {
   max-width: 26ch;
 }
 
-.dish {
-  background: #fff;
-  border-radius: 18px;
+/* ── MENU CATEGORY POPUP BAR ────────────────────────── */
+.menu-popup-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 60;
+  margin: 0 auto;
+  max-width: 480px;
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
+  background: var(--turquoise-deep);
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  box-shadow: 0 -8px 26px rgba(10, 74, 78, 0.28);
+  transform: translateY(115%);
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease,
+    visibility 0.4s;
+}
+
+.menu-popup-bar.visible {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.menu-popup-inner {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.menu-popup-inner::-webkit-scrollbar {
+  display: none;
+}
+
+.menu-popup-tab {
+  appearance: none;
+  flex: 0 0 auto;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  background: transparent;
+  color: #fff;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+  padding: 9px 15px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.menu-popup-tab:hover {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.menu-popup-tab.active {
+  background: var(--lime);
+  border-color: var(--lime);
+  color: var(--turquoise-deep);
+}
+
+.menu-popup-tab:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(187, 221, 30, 0.6);
+}
+
+/* ── MENU CARD GRID ─────────────────────────────────── */
+.dish-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  max-width: 420px;
+  margin: 0 auto;
+  justify-items: center;
+}
+
+/* ── MENU CARD FLIP ─────────────────────────────────── */
+
+/* Outer positioning wrapper */
+.dish-wrap {
+  width: 100%;
+  max-width: 420px;
+}
+
+/* Flip root — perspective here, NO overflow:hidden (clips 3D) */
+.dish-card {
+  display: block;
+  width: 100%;
+  perspective: 1100px;
+  cursor: pointer;
+  border-radius: 20px;
+  outline: none;
+}
+
+.dish-card:focus-visible {
+  box-shadow: 0 0 0 3px var(--lime);
+}
+
+/* The rotating inner container */
+.dish-card-inner {
+  position: relative;
+  width: 100%;
+  height: 340px;
+  transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* JS-driven flip — toggled by .flipped class */
+.dish-card.flipped .dish-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Shared face styles */
+.dish-face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 20px;
   overflow: hidden;
   box-shadow: var(--shadow-lg);
-  margin-bottom: 22px;
-  max-width: 360px;
 }
 
-.dish:nth-child(2) {
-  margin-left: 12px;
-}
-
-.dish:nth-child(3) {
-  margin-left: 0;
-  margin-right: 8px;
-}
-
-.dish:nth-child(4) {
-  margin-left: 18px;
+/* FRONT face: image on top, title + hint below */
+.dish-front {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
 }
 
 .dish-img {
-  height: 188px;
   position: relative;
+  flex: 1 1 0;
+  min-height: 0;
 }
 
 .dish-img img {
@@ -538,19 +656,121 @@ nav.bar {
 }
 
 .dish-body {
-  padding: 16px 18px 19px;
+  flex-shrink: 0;
+  padding: 16px 20px 18px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .dish-body h3 {
-  font-size: 21px;
+  font-size: 22px;
   font-weight: 700;
-  margin-bottom: 6px;
+  line-height: 1.25;
 }
 
-.dish-body p {
-  font-size: 14.5px;
-  color: rgba(10, 74, 78, 0.72);
+.dish-hint {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--turquoise);
+  color: #fff;
+}
+
+.dish-hint-icon {
+  width: 20px;
+  height: 20px;
+  animation: hint-tap 1.6s ease-in-out infinite;
+}
+
+@keyframes hint-tap {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+/* BACK face — pre-rotated so it faces away on start */
+.dish-back {
+  transform: rotateY(180deg);
+  background: #fff;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  border: 6px solid var(--turquoise);
+  border-radius: 20px;
+  padding: 9px;
+}
+
+.dish-back-inner {
+  flex: 1 1 auto;
+  border: 2px dashed var(--turquoise);
+  border-radius: 12px;
+  padding: 26px 26px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0;
+}
+
+/* Dish title */
+.dish-back-eyebrow {
+  font-family: var(--font-pacifico), cursive;
+  font-size: 27px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--turquoise);
+  margin-bottom: 20px;
+  line-height: 1.15;
+  text-align: left;
   text-wrap: pretty;
+}
+
+/* Thin divider */
+.dish-back-divider {
+  display: none;
+}
+
+/* Bullet list */
+.dish-back-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  width: 100%;
+}
+
+.dish-back-list li {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--turquoise-deep);
+  text-align: left;
+}
+
+.dish-back-list li::before {
+  content: "";
+  display: inline-block;
+  flex-shrink: 0;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--lime);
+}
+
+/* Tap-back cue */
+.dish-back-tap {
+  display: none;
 }
 
 .menu-sec .more {

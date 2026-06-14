@@ -53,8 +53,11 @@ export const strengths = [
     num: "03",
     title: "A víz partján, nem mellette",
     description: "Van pár hely, ahol igazán jó leülni. Mi ott vagyunk.",
+    image: "/images/kupiBB8.jpg",
+    imageAlt: "KuPi terasz",
     reverse: false,
-    hasImage: false,
+    hasImage: true,
+    rotationClass: "r3",
   },
 ] as const;
 
@@ -62,26 +65,230 @@ export const menuContent = {
   title: "Ma ezt ajánljuk",
   subtitle: "Amit ma reggel hoztak, ma el is fogy.",
   moreLink: "Teljes menü →",
-  dishes: [
+  categories: [
     {
-      image: "/images/kupiBB8.jpg",
-      imageAlt: "KuPi Burger",
-      title: "KuPi Burger",
-      description:
-        "Briós zsemle, házi BBQ szósz, karamellizált hagyma, coleslaw",
+      id: "levesek",
+      label: "Levesek",
+      dishes: [
+        {
+          image: "/images/kupiBB2.jpg",
+          imageAlt: "Halászlé",
+          title: "Halászlé",
+          description: "Dunai ponty, erős paprika, házi gyufatészta",
+        },
+        {
+          image: "/images/kupiBB7.jpg",
+          imageAlt: "Gulyásleves",
+          title: "Gulyásleves",
+          description: "Marhalábszár, burgonya, csipetke, pirospaprika",
+        },
+        {
+          image: "/images/kupiBB9.jpg",
+          imageAlt: "Tárkonyos raguleves",
+          title: "Tárkonyos raguleves",
+          description: "Csirkecomb, zöldségek, tárkony, tejföl",
+        },
+        {
+          image: "/images/kupiBB4.jpg",
+          imageAlt: "Zöldségkrémleves",
+          title: "Zöldségkrémleves",
+          description: "Szezonális zöldségek, frissen őrölt bors, pirított mag",
+        },
+      ],
     },
     {
-      image: "/images/kupiBB2.jpg",
-      imageAlt: "Rántott hal tányér",
-      title: "Rántott hal tányér",
-      description:
-        "Ropogós bundában, friss citrommal, házi sültkrumplival",
+      id: "gyermekeknek",
+      label: "Gyermekeknek",
+      dishes: [
+        {
+          image: "/images/kupiBB2.jpg",
+          imageAlt: "Rántott csirkemell",
+          title: "Rántott csirkemell",
+          description: "Ropogós bunda, sültkrumpli, ketchup",
+        },
+        {
+          image: "/images/kupiBB9.jpg",
+          imageAlt: "Sajtos tészta",
+          title: "Sajtos tészta",
+          description: "Friss tészta, vajas reszelt sajt",
+        },
+        {
+          image: "/images/kupiBB8.jpg",
+          imageAlt: "Mini sajtburger",
+          title: "Mini sajtburger",
+          description: "Puha zsemle, marhapogácsa, sajt",
+        },
+        {
+          image: "/images/kupiBB4.jpg",
+          imageAlt: "Rántott sajt",
+          title: "Rántott sajt",
+          description: "Trappista sajt, sültkrumpli, tartármártás",
+        },
+      ],
     },
     {
-      image: "/images/kupiBB7.jpg",
-      imageAlt: "Havi különlegesség",
-      title: "Havi különlegesség",
-      description: "Minden hónapban más — kérdezd meg a személyzetet",
+      id: "foetelek",
+      label: "Főételek",
+      dishes: [
+        {
+          image: "/images/kupiBB2.jpg",
+          imageAlt: "Rántott hal tányér",
+          title: "Rántott hal tányér",
+          description: "Ropogós bundában, friss citrom, házi sültkrumpli",
+        },
+        {
+          image: "/images/kupiBB7.jpg",
+          imageAlt: "Grillezett pisztráng",
+          title: "Grillezett pisztráng",
+          description: "Friss pisztráng, citrom, párolt zöldség, vajas burgonya",
+        },
+        {
+          image: "/images/kupiBB9.jpg",
+          imageAlt: "Csirkemell roston",
+          title: "Csirkemell roston",
+          description: "Fűszeres csirkemell, grillzöldség, jázminrizs",
+        },
+        {
+          image: "/images/kupiBB4.jpg",
+          imageAlt: "Sült csülök",
+          title: "Sült csülök",
+          description: "Lassan sült csülök, párolt káposzta, házi mustár",
+        },
+        {
+          image: "/images/kupiBB5.jpg",
+          imageAlt: "Vegetáriánus tál",
+          title: "Vegetáriánus tál",
+          description: "Grillzöldségek, halloumi, házi humusz",
+        },
+      ],
+    },
+    {
+      id: "kezmuves-burgerek",
+      label: "Kézműves burgerek",
+      dishes: [
+        {
+          image: "/images/kupiBB8.jpg",
+          imageAlt: "KuPi Burger",
+          title: "KuPi Burger",
+          description:
+            "Briós zsemle, házi BBQ szósz, karamellizált hagyma, coleslaw",
+        },
+        {
+          image: "/images/kupiBB7.jpg",
+          imageAlt: "Füstölt csülkös burger",
+          title: "Füstölt csülkös burger",
+          description: "Pulled pork, savanyú uborka, házi BBQ szósz",
+        },
+        {
+          image: "/images/kupiBB9.jpg",
+          imageAlt: "Csirkeburger",
+          title: "Csirkeburger",
+          description: "Rántott csirkemell, friss saláta, chilis majonéz",
+        },
+        {
+          image: "/images/kupiBB2.jpg",
+          imageAlt: "Halburger",
+          title: "Halburger",
+          description: "Ropogós halfilé, tartármártás, jégsaláta",
+        },
+        {
+          image: "/images/kupiBB1.jpg",
+          imageAlt: "Kecskesajtos burger",
+          title: "Kecskesajtos burger",
+          description: "Marhapogácsa, kecskesajt, lekváros hagyma",
+        },
+      ],
+    },
+    {
+      id: "szurkemarha-burgerek",
+      label: "Szürkemarha burgerek",
+      dishes: [
+        {
+          image: "/images/kupiBB8.jpg",
+          imageAlt: "Szürkemarha Classic",
+          title: "Szürkemarha Classic",
+          description: "Szürkemarha pogácsa, cheddar, friss saláta, paradicsom",
+        },
+        {
+          image: "/images/kupiBB7.jpg",
+          imageAlt: "Szürkemarha BBQ",
+          title: "Szürkemarha BBQ",
+          description: "Szürkemarha pogácsa, füstölt szalonna, házi BBQ szósz",
+        },
+        {
+          image: "/images/kupiBB1.jpg",
+          imageAlt: "Szürkemarha Truffle",
+          title: "Szürkemarha Truffle",
+          description: "Szürkemarha pogácsa, szarvasgombás majonéz, rukkola",
+        },
+        {
+          image: "/images/kupiBB9.jpg",
+          imageAlt: "Szürkemarha Blue",
+          title: "Szürkemarha Blue",
+          description: "Szürkemarha pogácsa, kékpenészes sajt, karamellizált hagyma",
+        },
+      ],
+    },
+    {
+      id: "angusmarha-burgerek",
+      label: "Angusmarha burgerek",
+      dishes: [
+        {
+          image: "/images/kupiBB8.jpg",
+          imageAlt: "Angus Double",
+          title: "Angus Double",
+          description: "Két angus pogácsa, dupla cheddar, bacon, BBQ szósz",
+        },
+        {
+          image: "/images/kupiBB1.jpg",
+          imageAlt: "Angus Classic",
+          title: "Angus Classic",
+          description: "Angus pogácsa, cheddar, saláta, paradicsom, hagyma",
+        },
+        {
+          image: "/images/kupiBB7.jpg",
+          imageAlt: "Angus Jalapeño",
+          title: "Angus Jalapeño",
+          description: "Angus pogácsa, jalapeño, pepper jack sajt, chilis majonéz",
+        },
+        {
+          image: "/images/kupiBB9.jpg",
+          imageAlt: "Angus Mushroom",
+          title: "Angus Mushroom",
+          description: "Angus pogácsa, pirított gomba, svájci sajt",
+        },
+      ],
+    },
+    {
+      id: "egyeb-premium-burgerek",
+      label: "Egyéb prémium burgerek",
+      dishes: [
+        {
+          image: "/images/kupiBB8.jpg",
+          imageAlt: "Wagyu Signature",
+          title: "Wagyu Signature",
+          description:
+            "Wagyu pogácsa, trüffel majonéz, karamellizált hagyma, rukkola",
+        },
+        {
+          image: "/images/kupiBB1.jpg",
+          imageAlt: "Bárányburger",
+          title: "Bárányburger",
+          description: "Fűszeres bárány pogácsa, tzatziki, friss menta",
+        },
+        {
+          image: "/images/kupiBB7.jpg",
+          imageAlt: "Kacsamell burger",
+          title: "Kacsamell burger",
+          description: "Konfitált kacsa, lekváros hagyma, kecskesajt",
+        },
+        {
+          image: "/images/kupiBB2.jpg",
+          imageAlt: "Tenger gyümölcsei burger",
+          title: "Tenger gyümölcsei burger",
+          description: "Garnélapogácsa, citromos majonéz, jégsaláta",
+        },
+      ],
     },
   ],
 } as const;

@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 
 type RevealVariant = "reveal" | "reveal-l" | "reveal-r" | "zoomy";
 
-type ScrollRevealProps = {
+type ScrollRevealProps = React.HTMLAttributes<HTMLDivElement> & {
   children: React.ReactNode;
   variant?: RevealVariant;
   className?: string;
@@ -14,6 +14,7 @@ export const ScrollReveal = ({
   children,
   variant = "reveal",
   className = "",
+  ...rest
 }: ScrollRevealProps) => {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -41,7 +42,7 @@ export const ScrollReveal = ({
   const combinedClassName = [variant, className].filter(Boolean).join(" ");
 
   return (
-    <div ref={ref} className={combinedClassName}>
+    <div ref={ref} className={combinedClassName} {...rest}>
       {children}
     </div>
   );
