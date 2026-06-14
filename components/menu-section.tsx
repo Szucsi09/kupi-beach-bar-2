@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { menuContent } from "@/lib/site-content";
 import { ScrollReveal } from "@/components/scroll-reveal";
 
@@ -109,32 +109,30 @@ export const MenuSection = () => {
   const [activeId, setActiveId] = useState<CategoryId>(
     menuContent.categories[0].id,
   );
+  const [barVisible, setBarVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
   const activeCategory =
     menuContent.categories.find((c) => c.id === activeId) ??
     menuContent.categories[0];
 
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const io = new IntersectionObserver(
+      ([entry]) => setBarVisible(entry.isIntersecting),
+      { rootMargin: "0px 0px -45% 0px", threshold: 0 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   return (
-    <section className="menu-sec" id="menu">
+    <section className="menu-sec" id="menu" ref={sectionRef}>
       <ScrollReveal className="head">
         <h2>{menuContent.title}</h2>
         <p>{menuContent.subtitle}</p>
-      </ScrollReveal>
-
-      <ScrollReveal className="menu-tabs-wrap">
-        <div className="menu-tabs" role="tablist" aria-label="Menü kategóriák">
-          {menuContent.categories.map((cat) => (
-            <button
-              key={cat.id}
-              type="button"
-              role="tab"
-              aria-selected={cat.id === activeId}
-              className={`menu-tab${cat.id === activeId ? " active" : ""}`}
-              onClick={() => setActiveId(cat.id)}
-            >
-              {cat.label}
-            </button>
-          ))}
-        </div>
       </ScrollReveal>
 
       <div className="dish-grid">
@@ -152,6 +150,31 @@ export const MenuSection = () => {
           {menuContent.moreLink}
         </Link>
       </ScrollReveal>
+
+      <div
+        className={`menu-popup-bar${barVisible ? " visible" : ""}`}
+        aria-hidden={!barVisible}
+      >
+        <div
+          className="menu-popup-inner"
+          role="tablist"
+          aria-label="Menü kategóriák"
+        >
+          {menuContent.categories.map((cat) => (
+            <button
+              key={cat.id}
+              type="button"
+              role="tab"
+              aria-selected={cat.id === activeId}
+              tabIndex={barVisible ? 0 : -1}
+              className={`menu-popup-tab${cat.id === activeId ? " active" : ""}`}
+              onClick={() => setActiveId(cat.id)}
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
+      </div>
     </section>
   );
 };
