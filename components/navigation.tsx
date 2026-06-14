@@ -30,7 +30,9 @@ export const Navigation = () => {
             aria-label="Menü"
             aria-expanded={isOpen}
           >
-            MENÜ
+            <span />
+            <span />
+            <span />
           </button>
         </div>
       </nav>

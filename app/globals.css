@@ -138,29 +138,25 @@ nav.bar {
 }
 
 .hamb {
+  width: 46px;
   height: 46px;
-  padding: 0 22px;
   border: none;
   background: var(--turquoise);
   border-radius: 13px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 5px;
   cursor: pointer;
-  color: #fff;
-  font-family: var(--font-dm-sans), sans-serif;
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  transition: background 0.2s ease, transform 0.15s ease;
 }
 
-.hamb:hover {
-  background: var(--turquoise-deep);
-}
-
-.hamb:active {
-  transform: scale(0.96);
+.hamb span {
+  width: 21px;
+  height: 2.5px;
+  background: #fff;
+  border-radius: 2px;
+  transition: 0.3s;
 }
 
 .menu {
