@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { menuContent } from "@/lib/site-content";
 import { ScrollReveal } from "@/components/scroll-reveal";
 
@@ -15,15 +14,16 @@ function PointingHandIcon() {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.8"
+      strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
     >
-      <path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V12" />
-      <path d="M11 12V4a1.5 1.5 0 0 1 3 0v8" />
-      <path d="M14 11.5a1.5 1.5 0 0 1 3 0V13" />
-      <path d="M17 12.5a1.5 1.5 0 0 1 3 0V16a6 6 0 0 1-6 6h-2.5a6 6 0 0 1-4.3-1.8l-3.6-3.7a1.5 1.5 0 0 1 2.1-2.1L8 16" />
+      <path d="M22 14a8 8 0 0 1-8 8" />
+      <path d="M18 11v-1a2 2 0 0 0-2-2a2 2 0 0 0-2 2" />
+      <path d="M14 10V9a2 2 0 0 0-2-2a2 2 0 0 0-2 2v1" />
+      <path d="M10 9.5V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v10" />
+      <path d="M18 11a2 2 0 1 1 4 0v3a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
     </svg>
   );
 }
@@ -128,6 +128,23 @@ export const MenuSection = () => {
     return () => io.disconnect();
   }, []);
 
+  const handleCategoryChange = useCallback((categoryId: CategoryId) => {
+    setActiveId(categoryId);
+
+    const sectionEl = sectionRef.current;
+    if (!sectionEl) return;
+
+    const navEl = document.querySelector("nav.bar") as HTMLElement | null;
+    const navHeight = navEl?.offsetHeight ?? 0;
+    const sectionTop = sectionEl.getBoundingClientRect().top + window.scrollY;
+    const targetTop = Math.max(sectionTop - navHeight, 0);
+
+    window.scrollTo({
+      top: targetTop,
+      behavior: "smooth",
+    });
+  }, []);
+
   return (
     <section className="menu-sec" id="menu" ref={sectionRef}>
       <ScrollReveal className="head">
@@ -144,12 +161,6 @@ export const MenuSection = () => {
           </div>
         ))}
       </div>
-
-      <ScrollReveal className="more">
-        <Link href="#menu" className="link-lime">
-          {menuContent.moreLink}
-        </Link>
-      </ScrollReveal>
 
       <div
         className={`menu-popup-bar${barVisible ? " visible" : ""}`}
@@ -168,7 +179,7 @@ export const MenuSection = () => {
               aria-selected={cat.id === activeId}
               tabIndex={barVisible ? 0 : -1}
               className={`menu-popup-tab${cat.id === activeId ? " active" : ""}`}
-              onClick={() => setActiveId(cat.id)}
+              onClick={() => handleCategoryChange(cat.id)}
             >
               {cat.label}
             </button>

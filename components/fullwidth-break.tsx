@@ -5,7 +5,7 @@ import { ScrollReveal } from "@/components/scroll-reveal";
 export const FullwidthBreak = () => (
   <ScrollReveal variant="zoomy" className="full">
     <Image
-      src="/images/kupiBB5.jpg"
+      src={fullwidthBreak.image}
       alt={fullwidthBreak.imageAlt}
       fill
       sizes="100vw"

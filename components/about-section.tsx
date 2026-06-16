@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { aboutContent } from "@/lib/site-content";
+import { AboutPhotoCarousel } from "@/components/about-photo-carousel";
 import { ScrollReveal } from "@/components/scroll-reveal";
 
 export const AboutSection = () => (
@@ -22,12 +22,7 @@ export const AboutSection = () => (
       </ScrollReveal>
     ))}
     <ScrollReveal variant="reveal-r" className="about-photo photo">
-      <Image
-        src="/images/kupiBB4.jpg"
-        alt={aboutContent.imageAlt}
-        fill
-        sizes="72vw"
-      />
+      <AboutPhotoCarousel images={aboutContent.images} />
     </ScrollReveal>
   </section>
 );
