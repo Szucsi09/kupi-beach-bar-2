@@ -149,7 +149,6 @@ export const MenuSection = () => {
     <section className="menu-sec" id="menu" ref={sectionRef}>
       <ScrollReveal className="head">
         <h2>{menuContent.title}</h2>
-        <p>{menuContent.subtitle}</p>
       </ScrollReveal>
 
       <div className="dish-grid">

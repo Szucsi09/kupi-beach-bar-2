@@ -82,7 +82,6 @@ export const strengths = [
 
 export const menuContent = {
   title: "Étlapunk",
-  // subtitle: "KuPi Gasztro Akadémia — frissen, gondosan, a tó partján.",
   categories: [
     {
       id: "eloetelek",
