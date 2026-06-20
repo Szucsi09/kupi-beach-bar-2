@@ -1277,7 +1277,9 @@ footer {
   position: fixed;
   inset: 0;
   z-index: 200;
-  background: var(--white);
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1304,15 +1306,20 @@ footer {
 }
 
 .site-intro-title {
-  text-align: center;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 30px;
+  text-align: left;
   opacity: 0;
   transform: translateY(46px);
   transition: opacity 0.9s ease, transform 1s cubic-bezier(0.2, 0.7, 0.3, 1);
 }
 
 .site-intro-title h1 {
-  font-size: 52px;
+  font-size: 56px;
   color: var(--turquoise-deep);
+  text-align: left;
   letter-spacing: -0.5px;
   line-height: 1.18;
 }
