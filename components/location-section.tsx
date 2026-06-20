@@ -34,11 +34,15 @@ export const LocationSection = () => (
         </div>
       ))}
     </ScrollReveal>
-    <ScrollReveal className="map">
-      <div className="pin">
-        <PinIcon />
-        KuPi Beach Bar
-      </div>
+    <ScrollReveal className="map photo">
+      <iframe
+        src={locationContent.mapEmbedUrl}
+        title="KuPi Beach Bar térkép"
+        className="map-embed"
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+        allowFullScreen
+      />
     </ScrollReveal>
     <ScrollReveal className="addr">
       <b>{locationContent.address.name}</b>

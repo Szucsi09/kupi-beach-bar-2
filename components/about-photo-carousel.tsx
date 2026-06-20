@@ -12,7 +12,7 @@ type AboutPhotoCarouselProps = {
   images: readonly AboutPhoto[];
 };
 
-const intervalMs = 3000;
+const intervalMs = 2000;
 
 export const AboutPhotoCarousel = ({
   images,

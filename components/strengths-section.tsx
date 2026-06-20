@@ -1,10 +1,13 @@
 import Image from "next/image";
-import { strengths } from "@/lib/site-content";
+import { strengthsContent } from "@/lib/site-content";
 import { ScrollReveal } from "@/components/scroll-reveal";
 
 export const StrengthsSection = () => (
   <section className="strengths">
-    {strengths.map((item) => (
+    <ScrollReveal className="eyebrow">
+      <span>{strengthsContent.eyebrow}</span>
+    </ScrollReveal>
+    {strengthsContent.items.map((item) => (
       <ScrollReveal
         key={item.num}
         variant={item.reverse ? "reveal-r" : "reveal-l"}

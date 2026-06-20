@@ -2,12 +2,32 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
-import { footerContent, navLinks } from "@/lib/site-content";
+import { Fragment, useCallback, useEffect, useState } from "react";
+import { navLinks } from "@/lib/site-content";
+import { scrollToSection } from "@/lib/scroll-to-section";
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isAtTop, setIsAtTop] = useState(true);
+
+  useEffect(() => {
+    const navEl = document.querySelector("nav.bar");
+    if (!(navEl instanceof HTMLElement)) return;
+
+    const setNavHeight = () => {
+      document.documentElement.style.setProperty(
+        "--nav-height",
+        `${navEl.offsetHeight}px`,
+      );
+    };
+
+    setNavHeight();
+
+    const resizeObserver = new ResizeObserver(setNavHeight);
+    resizeObserver.observe(navEl);
+
+    return () => resizeObserver.disconnect();
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,6 +42,22 @@ export const Navigation = () => {
 
   const handleOpen = useCallback(() => setIsOpen(true), []);
   const handleClose = useCallback(() => setIsOpen(false), []);
+
+  const handleNavLinkClick = useCallback(
+    (event: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+      if (!href.startsWith("#")) return;
+
+      event.preventDefault();
+      handleClose();
+
+      const targetId = href.slice(1);
+      const targetEl = document.getElementById(targetId);
+      if (!targetEl) return;
+
+      scrollToSection(targetEl);
+    },
+    [handleClose],
+  );
 
   return (
     <>
@@ -49,8 +85,8 @@ export const Navigation = () => {
         </div>
       </nav>
 
-      <div className={`menu${isOpen ? " open" : ""}`} id="navMenu">
-        <div className="menu-top">
+      <div className={`nav-overlay${isOpen ? " open" : ""}`} id="navMenu">
+        <div className="nav-overlay-top">
           <Image
             className="nav-logo"
             src="/images/logo.png"
@@ -61,21 +97,27 @@ export const Navigation = () => {
           />
           <button
             type="button"
-            className="menu-close"
+            className="nav-overlay-close"
             onClick={handleClose}
             aria-label="Bezárás"
           >
             ×
           </button>
         </div>
-        <div className="menu-links">
-          {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} onClick={handleClose}>
-              {link.label}
-            </Link>
+        <div className="nav-overlay-links">
+          {navLinks.map((link, index) => (
+            <Fragment key={link.href}>
+              <Link
+                href={link.href}
+                style={{ animationDelay: `${0.1 + index * 0.07}s` }}
+                onClick={(event) => handleNavLinkClick(event, link.href)}
+              >
+                {link.label}
+              </Link>
+              <div className="nav-overlay-divider" aria-hidden="true" />
+            </Fragment>
           ))}
         </div>
-        <div className="menu-foot">{footerContent.menuFoot}</div>
       </div>
     </>
   );

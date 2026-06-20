@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { menuContent } from "@/lib/site-content";
+import { scrollToSection } from "@/lib/scroll-to-section";
 import { ScrollReveal } from "@/components/scroll-reveal";
 
 type Dish = (typeof menuContent.categories)[number]["dishes"][number];
@@ -105,12 +106,43 @@ function DishCard({ dish }: { dish: Dish }) {
 
 type CategoryId = (typeof menuContent.categories)[number]["id"];
 
+type MenuScrollState = {
+  isScrollable: boolean;
+  canScrollStart: boolean;
+  canScrollEnd: boolean;
+};
+
+const MenuScrollHintIcon = ({ direction }: { direction: "left" | "right" }) => (
+  <svg
+    className={`menu-popup-scroll-icon menu-popup-scroll-icon-${direction}`}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    {direction === "right" ? (
+      <path d="m9 18 6-6-6-6" />
+    ) : (
+      <path d="m15 18-6-6 6-6" />
+    )}
+  </svg>
+);
+
 export const MenuSection = () => {
   const [activeId, setActiveId] = useState<CategoryId>(
     menuContent.categories[0].id,
   );
   const [barVisible, setBarVisible] = useState(false);
+  const [scrollState, setScrollState] = useState<MenuScrollState>({
+    isScrollable: false,
+    canScrollStart: false,
+    canScrollEnd: false,
+  });
   const sectionRef = useRef<HTMLElement>(null);
+  const tabListRef = useRef<HTMLDivElement>(null);
 
   const activeCategory =
     menuContent.categories.find((c) => c.id === activeId) ??
@@ -128,21 +160,43 @@ export const MenuSection = () => {
     return () => io.disconnect();
   }, []);
 
+  const updateScrollState = useCallback(() => {
+    const el = tabListRef.current;
+    if (!el) return;
+
+    const isScrollable = el.scrollWidth > el.clientWidth + 1;
+    const canScrollStart = el.scrollLeft > 4;
+    const canScrollEnd =
+      el.scrollLeft + el.clientWidth < el.scrollWidth - 4;
+
+    setScrollState({ isScrollable, canScrollStart, canScrollEnd });
+  }, []);
+
+  useEffect(() => {
+    const el = tabListRef.current;
+    if (!el) return;
+
+    updateScrollState();
+
+    const handleScroll = () => updateScrollState();
+    el.addEventListener("scroll", handleScroll, { passive: true });
+
+    const resizeObserver = new ResizeObserver(() => updateScrollState());
+    resizeObserver.observe(el);
+
+    return () => {
+      el.removeEventListener("scroll", handleScroll);
+      resizeObserver.disconnect();
+    };
+  }, [updateScrollState, barVisible]);
+
   const handleCategoryChange = useCallback((categoryId: CategoryId) => {
     setActiveId(categoryId);
 
     const sectionEl = sectionRef.current;
     if (!sectionEl) return;
 
-    const navEl = document.querySelector("nav.bar") as HTMLElement | null;
-    const navHeight = navEl?.offsetHeight ?? 0;
-    const sectionTop = sectionEl.getBoundingClientRect().top + window.scrollY;
-    const targetTop = Math.max(sectionTop - navHeight, 0);
-
-    window.scrollTo({
-      top: targetTop,
-      behavior: "smooth",
-    });
+    scrollToSection(sectionEl);
   }, []);
 
   return (
@@ -166,23 +220,51 @@ export const MenuSection = () => {
         aria-hidden={!barVisible}
       >
         <div
-          className="menu-popup-inner"
-          role="tablist"
-          aria-label="Menü kategóriák"
+          className={[
+            "menu-popup-scroll",
+            scrollState.isScrollable ? "is-scrollable" : "",
+          ]
+            .filter(Boolean)
+            .join(" ")}
         >
-          {menuContent.categories.map((cat) => (
-            <button
-              key={cat.id}
-              type="button"
-              role="tab"
-              aria-selected={cat.id === activeId}
-              tabIndex={barVisible ? 0 : -1}
-              className={`menu-popup-tab${cat.id === activeId ? " active" : ""}`}
-              onClick={() => handleCategoryChange(cat.id)}
+          {scrollState.isScrollable ? (
+            <p className="menu-popup-scroll-hint" aria-hidden="true">
+              <MenuScrollHintIcon direction="left" />
+              <span>Görgess a kategóriák között</span>
+              <MenuScrollHintIcon direction="right" />
+            </p>
+          ) : null}
+          <div
+            className={[
+              "menu-popup-track",
+              scrollState.isScrollable ? "is-scrollable" : "",
+              scrollState.canScrollStart ? "can-scroll-start" : "",
+              scrollState.canScrollEnd ? "can-scroll-end" : "",
+            ]
+              .filter(Boolean)
+              .join(" ")}
+          >
+            <div
+              ref={tabListRef}
+              className="menu-popup-inner"
+              role="tablist"
+              aria-label="Menü kategóriák — görgess oldalra a többi kategóriáért"
             >
-              {cat.label}
-            </button>
-          ))}
+            {menuContent.categories.map((cat) => (
+              <button
+                key={cat.id}
+                type="button"
+                role="tab"
+                aria-selected={cat.id === activeId}
+                tabIndex={barVisible ? 0 : -1}
+                className={`menu-popup-tab${cat.id === activeId ? " active" : ""}`}
+                onClick={() => handleCategoryChange(cat.id)}
+              >
+                {cat.label}
+              </button>
+            ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

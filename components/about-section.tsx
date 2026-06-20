@@ -12,8 +12,8 @@ export const AboutSection = () => (
         <p>
           {index === 1 ? (
             <>
-              Azért vagyunk itt, mert úgy gondoljuk, hogy a vízparton is lehet{" "}
-              <strong>valóban jót enni.</strong>
+              Ha minőségi alapanyagokra, hozzáértő szakácsra, és különleges fogásokra vágysz pihenés közben is, {" "}
+              <strong>nálunk a helyed!</strong>
             </>
           ) : (
             paragraph

@@ -1,14 +1,13 @@
 export const navLinks = [
-  { href: "#hero", label: "Kezdőlap" },
-  { href: "#about", label: "Rólunk" },
-  { href: "#menu", label: "Menü" },
+  { href: "#about", label: "Miért mi?" },
+  { href: "#menu", label: "Étlap" },
   { href: "#reviews", label: "Vélemények" },
   { href: "#location", label: "Helyszín" },
 ] as const;
 
 export const heroContent = {
   titleLine1: "Prémium fogások",
-  titleLine2: "a vízparton",
+  titleLine2: "a tóparton",
   cta: "Megnézem az étlapot",
 } as const;
 
@@ -19,10 +18,10 @@ export const fullwidthBreak = {
 } as const;
 
 export const aboutContent = {
-  eyebrow: "Ismerős érzés?",
+  eyebrow: "Miért mi?",
   paragraphs: [
     "A strandbüfék nagy része gyors, olcsó, felejthető. De te nem ezért jöttél ide.",
-    "Azért vagyunk itt, mert úgy gondoljuk, hogy a vízparton is lehet valóban jót enni.",
+    "Ha minőségi alapanyagokra, hozzáértő szakácsra, és különleges fogásokra vágysz pihenés közben is, nálunk a helyed!",
   ],
   images: [
     {
@@ -45,7 +44,9 @@ export const aboutContent = {
   imageAlt: "KuPi kívülről, fehér pergola",
 } as const;
 
-export const strengths = [
+export const strengthsContent = {
+  eyebrow: "Különlegességeink",
+  items: [
   {
     num: "01",
     title: "Angus és szürkemarha hamburgerek",
@@ -78,7 +79,8 @@ export const strengths = [
     hasImage: true,
     rotationClass: "r3",
   },
-] as const;
+  ],
+} as const;
 
 export const menuContent = {
   title: "Étlapunk",
@@ -416,19 +418,19 @@ export const reviewsContent = {
   eyebrow: "Vendégvélemények",
   quotes: [
     {
-      text: "A gyerekeim általában mindennel szemben kritikusak — itt kétszer kértek.",
-      author: "Ági",
-      detail: "két gyerekkel nyaralt a tónál",
+      text: "Egyszerűen csúcs szuper hely!😊 Csodás hely, eszméletlenül finom ételek és egy rendkívül kedves személyzet. A kiszolgálás is a legjobb! Mindenkinek tiszta szívből ajánlom!😊",
+      author: "Barbara",
+      detail: "",
     },
     {
-      text: "Nem számítottam rá, hogy a nyaralás legjobb étkezése egy strandbüfében lesz.",
-      author: "Bence",
-      detail: "első alkalommal járt a tónál",
+      text: "A környék legjobb hamburgerét ettük itt. Kedves, gyors és segítőkesz mindenki.",
+      author: "Dominika",
+      detail: "",
     },
     {
-      text: "Évek óta ez a kedvenc helyünk. A minőség nem változott — csak egyre jobb lett.",
-      author: "Zsuzsa",
-      detail: "helyi lakos",
+      text: "Akárhányszor ott eszünk, mindig pozitívan távozunk. Az ételek nagyon finomak, szép az étel tányéron való elrendezése, kedvesek az ott dolgozók. Jó a hely hangulata. Minden szempontból 5 csillag :)",
+      author: "Barni",
+      detail: "",
     },
   ],
 } as const;
@@ -444,8 +446,8 @@ export const locationContent = {
   intro:
     "A tó felől az első étterem vagyunk",
   hours: [
-    { label: "Hétfő – Péntek", value: "14:00 – 21:00" },
-    { label: "Szombat – Vasárnap", value: "11:00 – 22:00" },
+    { label: "Vasárnap – Csütörtök", value: "12:00 – 20:00" },
+    { label: "Péntek – Szombat", value: "12:00 – 20:30" },
     { label: "Szezon", value: "Május – Szeptember" },
   ],
   address: {
@@ -453,10 +455,12 @@ export const locationContent = {
     street: "Tópart, Kunfehértó",
     phone: "+36 30 000 0000",
   },
+  mapEmbedUrl:
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2752.585811943664!2d19.395809877674402!3d46.37760507110365!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x474309d93c42835d%3A0x6c239be348dc821e!2sKuPi%20Beach%20Bar!5e0!3m2!1shu!2shu!4v1781879734418!5m2!1shu!2shu",
 } as const;
 
 export const footerContent = {
-  copyright: "© 2025 KuPi Beach Bar",
+  copyright: "© 2026 KuPi Beach Bar",
   menuFoot: "A tó partján · 14:00-tól nyitunk",
 } as const;
 
