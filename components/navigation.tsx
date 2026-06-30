@@ -65,7 +65,7 @@ export const Navigation = () => {
         <div className="bar-inner">
           <Image
             className="nav-logo"
-            src="/images/logo.png"
+            src="/images/logo3.png"
             alt="KuPi Beach Bar"
             width={120}
             height={38}
@@ -89,7 +89,7 @@ export const Navigation = () => {
         <div className="nav-overlay-top">
           <Image
             className="nav-logo"
-            src="/images/logo.png"
+            src="/images/logo3.png"
             alt="KuPi Beach Bar"
             width={120}
             height={42}

@@ -58,7 +58,7 @@ export const IntroOverlay = () => {
 
         <div className="intro-logo">
           <Image
-            src="/images/logo.png"
+            src="/images/logo2.png"
             alt="KuPi Beach Bar"
             width={520}
             height={300}
@@ -66,16 +66,14 @@ export const IntroOverlay = () => {
           />
         </div>
 
+        <p className="intro-sub">Tóparti étterem · Kunfehértó</p>
+
         <h1 className="intro-tagline script">
-          Prémium fogások
+          Prémium ízek
           <br />
-          <span className="intro-tagline-accent">a tóparton</span>
+          a tóparton
         </h1>
-
-        <p className="intro-sub">Tóparti strandbüfé · Kunfehértó</p>
       </div>
-
-      <span className="intro-skip">Koppints a továbblépéshez</span>
     </div>
   );
 };

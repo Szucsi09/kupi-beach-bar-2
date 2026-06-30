@@ -1280,7 +1280,8 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-top: 14vh;
   overflow: hidden;
   background: var(--turquoise);
   cursor: pointer;
@@ -1378,13 +1379,13 @@ footer {
 }
 
 .intro-tagline {
-  margin-top: 18px;
+  margin-top: 64px;
   font-size: 40px;
   line-height: 1.05;
   color: #fff;
   opacity: 0;
   transform: translateY(14px);
-  animation: intro-up 0.7s ease 0.95s forwards;
+  animation: intro-up 0.7s ease 1.15s forwards;
 }
 
 .intro-tagline-accent {
@@ -1392,14 +1393,14 @@ footer {
 }
 
 .intro-sub {
-  margin-top: 16px;
+  margin-top: 0px;
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.08em;
   color: rgba(255, 255, 255, 0.9);
   opacity: 0;
   transform: translateY(10px);
-  animation: intro-up 0.6s ease 1.35s forwards;
+  animation: intro-up 0.6s ease 0.9s forwards;
 }
 
 .intro-skip {

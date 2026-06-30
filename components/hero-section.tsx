@@ -83,7 +83,9 @@ export const HeroSection = () => {
         <h1>
           {heroContent.titleLine1}
           <br />
-          <span className="l2">{heroContent.titleLine2}</span>
+          {heroContent.titleLine2}
+          <br />
+          <span className="l2">{heroContent.titleLine3}</span>
         </h1>
       </ScrollReveal>
       <ScrollReveal>

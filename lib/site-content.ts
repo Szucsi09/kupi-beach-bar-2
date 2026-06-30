@@ -6,8 +6,9 @@ export const navLinks = [
 ] as const;
 
 export const heroContent = {
-  titleLine1: "Prémium fogások",
-  titleLine2: "a tóparton",
+  titleLine1: "Prémium",
+  titleLine2: "ízek",
+  titleLine3: "a tóparton",
   cta: "Megnézem az étlapot",
 } as const;
 
